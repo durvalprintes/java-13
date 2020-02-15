@@ -1,21 +1,31 @@
 package br.com.codenation.calculadora;
 
-
 public class CalculadoraSalario {
 
 	public long calcularSalarioLiquido(double salarioBase) {
-		//Use o Math.round apenas no final do método para arredondar o valor final.
-		//Documentação do método: https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html#round-double-
-		return Math.round(0.0);
+		double salarioFinal = calcularInss(salarioBase);
+		if (salarioFinal <=3000) {
+			return Math.round(salarioFinal);	
+		} else if (salarioFinal <= 6000) {
+			return Math.round(salarioFinal-=salarioFinal * 0.075);
+		} else {
+			return Math.round(salarioFinal-=salarioFinal * 0.15);
+		}
 	}
 	
-	
-	//Exemplo de método que pode ser criado para separar melhor as responsábilidades de seu algorítmo
 	private double calcularInss(double salarioBase) {
-		return 0.0;
+		if (salarioBase < 1039) {
+			return 0.0;
+		} else if (salarioBase <= 1500) {
+			return salarioBase-=salarioBase * 0.08;
+		} else if (salarioBase <=4000) {
+			return salarioBase-=salarioBase * 0.09;
+		} else {
+			return salarioBase-=salarioBase * 0.11;
+		}
 	}
-
+	public static void main(String[] args) {
+		CalculadoraSalario app = new CalculadoraSalario();
+		System.out.println(app.calcularSalarioLiquido(4000.01));	
+	}
 }
-/*Dúvidas ou Problemas?
-Manda e-mail para o meajuda@codenation.dev que iremos te ajudar! 
-*/
