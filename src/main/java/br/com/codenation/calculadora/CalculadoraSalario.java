@@ -3,13 +3,16 @@ package br.com.codenation.calculadora;
 public class CalculadoraSalario {
 
 	public long calcularSalarioLiquido(double salarioBase) {
-		double salarioFinal = calcularInss(salarioBase);
-		if (salarioFinal <=3000) {
-			return Math.round(salarioFinal);	
-		} else if (salarioFinal <= 6000) {
-			return Math.round(salarioFinal-=salarioFinal * 0.075);
+		return Math.round(calcularIr(calcularInss(salarioBase)));
+	}
+
+	public double calcularIr(double salarioBase) {
+		if (salarioBase <=3000) {
+			return salarioBase;	
+		} else if (salarioBase <= 6000) {
+			return salarioBase-=salarioBase * 0.075;
 		} else {
-			return Math.round(salarioFinal-=salarioFinal * 0.15);
+			return salarioBase-=salarioBase * 0.15;
 		}
 	}
 	
